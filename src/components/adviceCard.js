@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { useQuery } from "react-query";
+
 import NewAdviceButton from "./newAdviceButton";
 import dividerImg from "../images/pattern-divider-desktop.svg";
 
@@ -10,11 +12,32 @@ export default function AdviceCard() {
     const { isLoading, data, refetch } = useQuery('adviceData', async () => {
         const res = await fetch(ADVICE_API);
         return res.json();
-    })
+    },
+        {
+            enabled: true,
+        }
+    );
+
+    const [adviceId, setAdviceId] = useState(null);
+    const [adviceContent, setAdviceContent] = useState(null);
 
     // 클릭 이벤트
     const handleClickBtn = () => {
         refetch();
+
+        if (data) {
+            localStorage.setItem("adviceData", JSON.stringify({
+                id: data.slip.id,
+                content: data.slip.advice
+            }));
+        }
+
+        const getAdviceData = JSON.parse(localStorage.getItem("adviceData"));
+
+        if (getAdviceData) {
+            setAdviceId(getAdviceData.id);
+            setAdviceContent(getAdviceData.content);
+        }
     }
 
     return (
@@ -22,11 +45,11 @@ export default function AdviceCard() {
             {
                 isLoading ? <div className="text-white text-lg font-semibold -tracking-tighter my-8 break-keep">LOADING...</div> :
                     <>
-                        <h2 className="text-[#52FFA8] text-sm font-medium -tracking-tighter">ADVICE #{data.slip.id}</h2>
-                        <div className='text-white text-xl font-semibold -tracking-tighter my-8 break-keep'>"{data.slip.advice}"</div>
+                        <h2 className="text-[#52FFA8] text-sm font-medium -tracking-tighter">ADVICE #{adviceId}</h2>
+                        <div className='text-white text-xl font-semibold -tracking-tighter my-8 break-keep'>"{adviceContent}"</div>
                     </>
             }
-            <img className="inline-block text-center mb-8" src={dividerImg} />
+            <img className="inline-block text-center mb-8" src={dividerImg} alt="구분선 이미지" />
             <NewAdviceButton handleClickBtn={handleClickBtn} />
         </section>
     )
