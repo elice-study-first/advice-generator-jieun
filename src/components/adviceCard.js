@@ -18,16 +18,16 @@ export default function AdviceCard() {
         }
     );
 
-    const [adviceId, setAdviceId] = useState(null);
-    const [adviceContent, setAdviceContent] = useState(null);
-    const [initilalData, setInitialData] = useState(null);
+    const [adviceData, setAdviceData] = useState(null);
 
+    // 로컬 스토리지 데이터 가져오기
     const getAdviceData = JSON.parse(localStorage.getItem("adviceData"));
 
     // 클릭 이벤트
     const handleClickBtn = () => {
         refetch();
 
+        // 로컬 스토리지에 데이터 저장
         if (data) {
             localStorage.setItem("adviceData", JSON.stringify({
                 id: data.slip.id,
@@ -35,19 +35,17 @@ export default function AdviceCard() {
             }));
         }
 
+        // 상태에 저장
         if (getAdviceData) {
-            setAdviceId(getAdviceData.id);
-            setAdviceContent(getAdviceData.content);
+            setAdviceData(getAdviceData);
         }
     };
 
     // 초기값 설정
     useEffect(() => {
         if(getAdviceData) {
-            setInitialData(getAdviceData);   
+            setAdviceData(getAdviceData);   
         }
-
-        console.log(initilalData)
     }, [data])
 
     return (
@@ -55,8 +53,8 @@ export default function AdviceCard() {
             {
                 isLoading ? <div className="text-white text-lg font-semibold -tracking-tighter my-8 break-keep">LOADING...</div> :
                     <>
-                        <h2 className="text-[#52FFA8] text-sm font-medium -tracking-tighter">ADVICE #{adviceId !== null ? adviceId : initilalData.id}</h2>
-                        <div className='text-white text-xl font-semibold -tracking-tighter my-8 break-keep'>"{adviceContent !== null ? adviceContent : initilalData.content}"</div>
+                        <h2 className="text-[#52FFA8] text-sm font-medium -tracking-tighter">ADVICE #{adviceData.id}</h2>
+                        <div className='text-white text-xl font-semibold -tracking-tighter my-8 break-keep'>"{adviceData.content}"</div>
                     </>
             }
             <img className="inline-block text-center mb-8" src={dividerImg} alt="구분선 이미지" />
