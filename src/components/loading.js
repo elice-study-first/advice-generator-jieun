@@ -1,7 +1,13 @@
-import SyncLoader from "react-spinners/SyncLoader"
+import BeatLoader from "react-spinners/BeatLoader"
 
-function Loading () {
-    return(
-        <SyncLoader color="#4E5D73"></SyncLoader>
+export default function Loading() {
+    return (
+        <BeatLoader
+            color="#52FFA8"
+            size={12}
+            speedMultiplier={2}
+            margin={5}
+            className="mt-9 mb-12"
+        />
     )
 };
