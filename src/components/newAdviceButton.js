@@ -1,4 +1,4 @@
-import diceIcon from '../images/icon-dice.svg'
+import diceIcon from '../images/icon-dice.svg';
 
 export default function NewAdviceButton({ refetch, setAdviceData, getAdviceData, data }) {
 
@@ -7,7 +7,7 @@ export default function NewAdviceButton({ refetch, setAdviceData, getAdviceData,
         refetch();
 
         // 로컬 스토리지에 데이터 저장
-        if (data) {
+        if(data) {
             localStorage.setItem("adviceData", JSON.stringify({
                 id: data.slip.id,
                 content: data.slip.advice
@@ -16,6 +16,7 @@ export default function NewAdviceButton({ refetch, setAdviceData, getAdviceData,
 
         // 상태에 저장
         if (getAdviceData) setAdviceData(getAdviceData);
+
     };
 
     return (
