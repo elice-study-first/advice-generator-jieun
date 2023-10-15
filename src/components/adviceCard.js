@@ -36,16 +36,12 @@ export default function AdviceCard() {
         }
 
         // 상태에 저장
-        if (getAdviceData) {
-            setAdviceData(getAdviceData);
-        }
+        if (getAdviceData) setAdviceData(getAdviceData);
     };
 
     // 초기값 설정
     useEffect(() => {
-        if(getAdviceData) {
-            setAdviceData(getAdviceData);   
-        }
+        if(getAdviceData) setAdviceData(getAdviceData);   
     }, [data])
 
     return (
@@ -54,7 +50,7 @@ export default function AdviceCard() {
                 isLoading ? <div className="text-white text-lg font-semibold -tracking-tighter my-8 break-keep">LOADING...</div> :
                     <>
                         <h2 className="text-[#52FFA8] text-sm font-medium -tracking-tighter">ADVICE #{adviceData.id}</h2>
-                        <div className='text-white text-xl font-semibold -tracking-tighter my-8 break-keep'>"{adviceData.content}"</div>
+                        <div className='text-white text-xl font-semibold -tracking-tighter mt-8 mb-10 break-keep'>"{adviceData.content}"</div>
                     </>
             }
             <img className="inline-block text-center mb-8" src={dividerImg} alt="구분선 이미지" />
