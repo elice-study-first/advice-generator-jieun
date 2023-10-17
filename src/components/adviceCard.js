@@ -17,6 +17,7 @@ export default function AdviceCard() {
     },
         {
             enabled: true,
+            refetchOnWindowFocus: false
         }
     );
 
@@ -33,12 +34,13 @@ export default function AdviceCard() {
     }, [data])
 
     return (
-        <section className="w-1/3 max-h-96 p-8 bg-[#323A49] rounded-lg text-center relative shadow-[0_10px_20px_rgba(21,_26,_33,_0.7)]">
+        <section className="w-1/3 max-h-96 p-8 bg-[#323A49] rounded-lg text-center relative shadow-blue-gray">
             {isFetching ? <Loading /> : <CardContents adviceData={adviceData} />}
             <img className="inline-block text-center mb-8" src={dividerImg} alt="구분선 이미지" />
             <NewAdviceButton
                 data={data}
                 refetch={refetch}
+                isFetching={isFetching}
                 setAdviceData={setAdviceData}
                 getAdviceData={getAdviceData}
             />
