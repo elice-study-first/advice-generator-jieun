@@ -10,10 +10,15 @@ export default function AdviceCard() {
     // API 주소
     const ADVICE_API = "https://api.adviceslip.com/advice";
 
-    // react qurey로 데이터 불러오기
+    // react query 데이터 불러오기
     const { isFetching, data, refetch } = useQuery('adviceData', async () => {
-        const res = await fetch(ADVICE_API);
-        return res.json();
+        try{
+            const res = await fetch(ADVICE_API);
+            return res.json();
+
+        } catch(error) {
+            alert(`${error} 문제가 발생했습니다. 다시 시도해주세요.`)
+        }
     },
         {
             enabled: true,

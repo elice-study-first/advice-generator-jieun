@@ -12,22 +12,23 @@ export default function NewAdviceButton({ refetch, setAdviceData, getAdviceData,
                 id: data.slip.id,
                 content: data.slip.advice
             }));
-        }
 
-        // 상태에 저장
-        if (getAdviceData) setAdviceData(getAdviceData);
+            // 상태에 저장
+            if (getAdviceData) setAdviceData(getAdviceData);
+        };
     };
 
     return (
-        <div
+        <button
             onClick={handleClickBtn}
             className={`
                 w-14 h-14 rounded-full flex items-center justify-center absolute left-2/4 -translate-x-2/4 cursor-pointer transition-all bg-[#52FFA8] 
                 hover:shadow-light-emerald
                 ${isFetching ? "animate-changed-color" : "animate-none"}
             `}
+            disabled={isFetching ? true : false}
         >
             <img src={diceIcon} alt='주사위 이미지' />
-        </div>
+        </button>
     )
 };
