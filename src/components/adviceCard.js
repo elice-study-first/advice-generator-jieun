@@ -12,11 +12,11 @@ export default function AdviceCard() {
 
     // react query 데이터 불러오기
     const { isFetching, data, refetch } = useQuery('adviceData', async () => {
-        try{
+        try {
             const res = await fetch(ADVICE_API);
             return res.json();
 
-        } catch(error) {
+        } catch (error) {
             alert(`${error} 문제가 발생했습니다. 다시 시도해주세요.`)
         }
     },
@@ -40,7 +40,10 @@ export default function AdviceCard() {
 
     return (
         <section className="w-1/3 max-h-96 p-8 bg-[#323A49] rounded-lg text-center relative shadow-blue-gray">
-            {isFetching ? <Loading /> : <CardContents adviceData={adviceData} />}
+            {
+                isFetching ? 
+                    <Loading /> : <CardContents adviceData={adviceData} />
+            }
             <img className="inline-block text-center mb-8" src={dividerImg} alt="구분선 이미지" />
             <NewAdviceButton
                 data={data}

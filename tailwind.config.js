@@ -11,6 +11,7 @@ module.exports = {
       },
       animation: {
         'changed-color': 'changedColor .4s linear infinite',
+        'blink-effect': 'blinkEffect 1s step-start infinite',
       },
       keyframes: {
         changedColor: {
@@ -22,7 +23,12 @@ module.exports = {
             background: '#1CCEFF',
             boxShadow: 'rgba(28, 206, 255, .6) 0px 0px 16px'
           },
-        }
+        },
+        blinkEffect: {
+          '50%': {
+            opacity: 0
+          },
+        },
       },
     },
   },
