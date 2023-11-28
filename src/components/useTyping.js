@@ -1,34 +1,31 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 export default function useTyping(adviceData) {
 
     const [count, setCount] = useState(0);
     const [typingWord, setTypingWord] = useState("");
 
-     // 텍스트 타이핑 효과
-     useEffect(() => {
+    // 텍스트 타이핑 효과
+    useEffect(() => {
         const typingData = adviceData.content;
 
         const typingInterval = setInterval(() => {
-            setTypingWord((current) => {
+            setTypingWord(current => {
                 if (count < typingData.length) {
-                    let updateTypingWord = current;
-                    updateTypingWord += typingData[count];
-                    setCount(count + 1);
-
+                    let updateTypingWord = current + typingData[count];
+                    setCount(count => count + 1);
                     return updateTypingWord;
+                } else {
+                    clearInterval(typingInterval);
+                    return typingData;
                 }
             });
-            if (count >= typingData.length) {
-                setTypingWord(typingData);
-                setCount(typingData.length);
-            }
         }, 100);
 
         return () => {
             clearInterval(typingInterval);
         }
-    }, [typingWord]);
+    }, [count, adviceData.content]);
 
     return typingWord;
 }
