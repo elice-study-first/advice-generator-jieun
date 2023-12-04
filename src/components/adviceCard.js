@@ -12,17 +12,17 @@ export default function AdviceCard() {
 
     // react query 데이터 불러오기
     const { isFetching, data, refetch } = useQuery('adviceData', async () => {
-        try {
-            const res = await fetch(ADVICE_API);
-            return res.json();
+            const response = await fetch(ADVICE_API);
 
-        } catch (error) {
-            alert(`${error} 문제가 발생했습니다. 다시 시도해주세요.`)
-        }
+            if(!response.ok) {
+                throw new Error('에러가 발생했습니다.')
+            }
+            
+            return response.json();
     },
         {
             enabled: true,
-            refetchOnWindowFocus: false
+            refetchOnWindowFocus: false,
         }
     );
 
