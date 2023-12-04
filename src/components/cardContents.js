@@ -1,4 +1,4 @@
-import useTyping from "./useTyping";
+import useTyping from "./hooks/useTyping";
 
 export default function CardContents({ adviceData }) {
 
